@@ -1,0 +1,28 @@
+backend:
+  name: github # Tên của backend sử dụng để lưu trữ nội dung (có thể là 'git-gateway', 'github', 'gitlab', v.v.)
+  branch: main # Tên nhánh Git nơi lưu trữ nội dung
+
+local_backend: false # Chạy CMS trong chế độ local để phát triển
+
+media_folder: "static/images" # Thư mục nơi lưu trữ các tệp media (ảnh, video)
+public_folder: "/images" # Đường dẫn URL nơi truy cập các tệp media
+
+collections: # Khai báo các bộ sưu tập dữ liệu, chẳng hạn như bài viết, trang
+  - name: "posts" # Tên bộ sưu tập
+    label: "Blog Posts" # Nhãn hiển thị trong CMS
+    folder: "content/posts" # Thư mục chứa các tệp markdown hoặc JSON
+    create: true # Cho phép tạo mới nội dung
+    slug: "{{slug}}" # Định dạng URL cho nội dung mới
+    fields: # Các trường trong bộ sưu tập
+      - { label: "Title", name: "title", widget: "string" } # Trường tiêu đề
+      - { label: "Publish Date", name: "date", widget: "datetime" } # Trường ngày đăng
+      - { label: "Body", name: "body", widget: "markdown" } # Trường nội dung chính
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Content", name: "body", widget: "markdown" }
